@@ -2,10 +2,10 @@ final boolean isLibrary = project.hasProperty('BUILD_AS_LIBRARY')
 final boolean excludeNativeLibs = project.hasProperty('EXCLUDE_NATIVE_LIBS')
 
 if (isLibrary) {
-    apply plugin: 'com.android.library'
+    apply plugin: libs.plugins.android.library.get().pluginId
 }
 else {
-    apply plugin: 'com.android.application'
+    apply plugin: libs.plugins.android.application.get().pluginId
 }
 
 android {
@@ -59,6 +59,13 @@ android {
 
             ndk {
                 debugSymbolLevel = 'SYMBOL_TABLE'
+            }
+
+            postprocessing {
+                removeUnusedCode = true
+                removeUnusedResources = true
+                obfuscate = false
+                optimizeCode = true
             }
         }
     }
