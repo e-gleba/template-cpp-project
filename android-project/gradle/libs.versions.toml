@@ -22,11 +22,14 @@ version-code = "1"
 version-name = "1.0.0"
 app-namespace = "com.egleba.app"
 
+junit = "4.13.2"
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 
 [libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 # Add your app dependencies here when needed
 
 [bundles]
