@@ -3,34 +3,15 @@
 
 [versions]
 # Build system
-android-gradle-plugin = "8.11.1"
-cmake = "3.31.6"
-ndk = "27.3.13750724"
-build-tools = "36.0.0"
-
-# Java/JVM toolchain - unified across all modules
-java = "21"                   # Modern LTS version for 2025+
-jvm-target = "17"             # Android-compatible bytecode target
-
-# SDK versions
-compile-sdk = "35"
-min-sdk = "24"
-target-sdk = "35"
-
-# App versioning
-version-code = "1"
-version-name = "1.0.0"
-app-namespace = "com.egleba.app"
-
+androidGradlePlugin = "8.11.1"
 junit = "4.13.2"
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-# Add your app dependencies here when needed
 
 [bundles]
 # Group related dependencies

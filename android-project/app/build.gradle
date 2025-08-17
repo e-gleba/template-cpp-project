@@ -9,25 +9,25 @@ else {
 }
 
 android {
-    compileSdk = libs.versions.compile.sdk.get().toInteger()
-    ndkVersion = libs.versions.ndk.get()
-    namespace = libs.versions.app.namespace.get()
-    buildToolsVersion = libs.versions.build.tools.get()
+    compileSdk = 36
+    ndkVersion = "27.3.13750724"
+    namespace = "com.egleba.app"
+    buildToolsVersion = "36.0.0"
 
     compileOptions {
-        sourceCompatibility JavaVersion.toVersion(libs.versions.jvm.target.get())
-        targetCompatibility JavaVersion.toVersion(libs.versions.jvm.target.get())
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     defaultConfig {
         if (!isLibrary) {
-            applicationId = libs.versions.app.namespace.get()
+            applicationId = namespace
         }
 
-        minSdk = libs.versions.min.sdk.get().toInteger()
-        targetSdk = libs.versions.target.sdk.get().toInteger()
-        versionCode = libs.versions.version.code.get().toInteger()
-        versionName = libs.versions.version.name.get()
+        minSdk = 24
+        targetSdk 35
+        versionCode = 1
+        versionName = "1.0.0"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
@@ -74,7 +74,7 @@ android {
         externalNativeBuild {
             cmake {
                 path = file('../../CMakeLists.txt')
-                version = libs.versions.cmake.get()
+                version = "3.31.6"
             }
         }
     }
