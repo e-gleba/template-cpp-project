@@ -3,9 +3,9 @@
 
 [versions]
 # Build system
-android-gradle-plugin = "8.10.1"
-cmake = "4.0.2"
-ndk = "27.0.12077973"
+android-gradle-plugin = "8.11.1"
+cmake = "3.31.6"
+ndk = "27.3.13750724"
 build-tools = "36.0.0"
 
 # Java/JVM toolchain - unified across all modules
@@ -20,7 +20,7 @@ target-sdk = "35"
 # App versioning
 version-code = "1"
 version-name = "1.0.0"
-app-namespace = "mil.eugene.gamedev"
+app-namespace = "com.egleba.app"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }

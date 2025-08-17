@@ -1,8 +1,8 @@
-package mil.eugene.gamedev;
+package com.egleba.app;
 
 import org.libsdl.app.SDLActivity;
 
-public class GameDevSimulator extends SDLActivity {
+public class AppActivity extends SDLActivity {
     @Override
     protected String[] getLibraries() {
         return new String[]{
