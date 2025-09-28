@@ -6,7 +6,7 @@ public class AppActivity extends SDLActivity {
     @Override
     protected String[] getLibraries() {
         return new String[]{
-                "native_lib"
+                "sdl_app"
         };
     }
 }
