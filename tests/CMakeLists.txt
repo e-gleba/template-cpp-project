@@ -6,12 +6,12 @@ file(
     CONFIGURE_DEPENDS
     "*.cpp")
 
-add_executable(tests ${src})
+add_library(tests SHARED ${src})
 
 set_target_properties(tests PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON
                                        CXX_EXTENSIONS OFF)
 
-target_link_libraries(tests PRIVATE doctest::doctest)
+target_link_libraries(tests PRIVATE doctest::doctest log)
 
 target_compile_definitions(
     tests
@@ -25,4 +25,4 @@ target_compile_definitions(
         DOCTEST_CONFIG_USE_STD_HEADERS # use <iostream>, <string>, etc. instead of reimplementing
     )
 
-doctest_discover_tests(tests)
+#doctest_discover_tests(tests)
