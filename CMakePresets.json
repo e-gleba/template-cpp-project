@@ -20,6 +20,69 @@
       }
     },
     {
+      "name": "android-base",
+      "displayName": "Android Base",
+      "description": "Base preset for Android builds using official NDK",
+      "hidden": true,
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_SYSTEM_NAME": "Android",
+        "CMAKE_ANDROID_NDK": "$env{ANDROID_NDK_HOME}",
+        "CMAKE_ANDROID_STL_TYPE": "c++_shared",
+        "CMAKE_ANDROID_API": "24"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Android"
+      }
+    },
+    {
+      "name": "android-arm64",
+      "displayName": "Android (arm64-v8a)",
+      "description": "64-bit ARM Android build",
+      "inherits": "android-base",
+      "cacheVariables": {
+        "CMAKE_ANDROID_ARCH_ABI": "arm64-v8a"
+      }
+    },
+    {
+      "name": "android-arm32",
+      "displayName": "Android (armeabi-v7a)",
+      "description": "32-bit ARM Android build",
+      "inherits": "android-base",
+      "cacheVariables": {
+        "CMAKE_ANDROID_ARCH_ABI": "armeabi-v7a"
+      }
+    },
+    {
+      "name": "android-x64",
+      "displayName": "Android (x86_64)",
+      "description": "64-bit x86 Android build (emulator)",
+      "inherits": "android-base",
+      "cacheVariables": {
+        "CMAKE_ANDROID_ARCH_ABI": "x86_64"
+      }
+    },
+    {
+      "name": "android-x86",
+      "displayName": "Android (x86)",
+      "description": "32-bit x86 Android build (emulator)",
+      "inherits": "android-base",
+      "cacheVariables": {
+        "CMAKE_ANDROID_ARCH_ABI": "x86"
+      }
+    },
+    {
+      "name": "android-universal",
+      "displayName": "Android (Universal)",
+      "description": "Build all ABIs in one go (for AAR or multi-APK)",
+      "inherits": "android-base",
+      "cacheVariables": {
+        "CMAKE_ANDROID_ARCH_ABI": "arm64-v8a;armeabi-v7a;x86_64;x86"
+      }
+    },
+    {
       "name": "msvc",
       "displayName": "Microsoft Visual C++",
       "description": "MSVC toolchain configuration with Windows-specific optimizations",
@@ -61,6 +124,31 @@
     }
   ],
   "buildPresets": [
+    {
+      "name": "android-arm64",
+      "displayName": "Build Android (arm64)",
+      "configurePreset": "android-arm64"
+    },
+    {
+      "name": "android-arm32",
+      "displayName": "Build Android (arm32)",
+      "configurePreset": "android-arm32"
+    },
+    {
+      "name": "android-x64",
+      "displayName": "Build Android (x64)",
+      "configurePreset": "android-x64"
+    },
+    {
+      "name": "android-x86",
+      "displayName": "Build Android (x86)",
+      "configurePreset": "android-x86"
+    },
+    {
+      "name": "android-universal",
+      "displayName": "Build Android (All ABIs)",
+      "configurePreset": "android-universal"
+    },
     {
       "name": "msvc",
       "displayName": "MSVC Build",
@@ -126,10 +214,16 @@
   ],
   "packagePresets": [
     {
+      "name": "android-package",
+      "displayName": "Android Package",
+      "configurePreset": "android-universal",
+      "generators": ["ZIP"]
+    },
+    {
       "name": "msvc-package",
       "displayName": "MSVC Package",
       "configurePreset": "msvc",
-      "generators": ["ZIP", "NSIS"]
+      "generators": ["ZIP"]
     },
     {
       "name": "clang-package",
@@ -145,6 +239,25 @@
     }
   ],
   "workflowPresets": [
+    {
+      "name": "android-full",
+      "displayName": "Android Complete Pipeline",
+      "description": "Configure, build, and package for all Android ABIs",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "android-universal"
+        },
+        {
+          "type": "build",
+          "name": "android-universal"
+        },
+        {
+          "type": "package",
+          "name": "android-package"
+        }
+      ]
+    },
     {
       "name": "msvc-full",
       "displayName": "MSVC Complete Pipeline",
