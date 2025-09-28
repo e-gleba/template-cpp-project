@@ -3,18 +3,22 @@ Type=Application
 Name=@PROJECT_NAME@
 GenericName=@PROJECT_NAME@
 Comment=@PROJECT_DESCRIPTION@
-Exec=main %F
-Icon=icon
+Exec=@PROJECT_NAME@ %F
+Icon=@PROJECT_NAME@
 Terminal=false
-Categories=Utility;Development;
+Categories=Utility;
 Keywords=cpp;utility;command-line;linux;
 StartupNotify=true
+MimeType=
 Actions=About;Help;
+
+# Required for AppImage/AppCenter compliance
+X-Desktop-File-Install-Version=1.0
 
 [Desktop Action About]
 Name=About @PROJECT_NAME@
-Exec=xdg-open @PROJECT_HOMEPAGE_URL@
+Exec=xdg-open "@PROJECT_HOMEPAGE_URL@"
 
 [Desktop Action Help]
-Name=Get Help
-Exec=xdg-open @PROJECT_HOMEPAGE_URL@
+Name=Get Help Online
+Exec=xdg-open "@PROJECT_HOMEPAGE_URL@"

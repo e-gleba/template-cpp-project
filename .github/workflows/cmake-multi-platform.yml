@@ -17,39 +17,46 @@ jobs:
         compiler: [clang]
         include:
           - os: ubuntu-latest
-            compiler: clang
-            c_compiler: clang
-            cxx_compiler: clang++
+            preset: clang-full
           - os: windows-latest
-            compiler: clang
-            c_compiler: clang-cl
-            cxx_compiler: clang-cl
+            preset: msvc-full
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install LLVM (Windows)
-        if: matrix.os == 'windows-latest'
-        run: choco install ninja
+      - name: Cache CPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}/_deps
+            ~/.cache/CPM
+          key: cpm-${{ matrix.os }}-${{ hashFiles('CMakeLists.txt', 'cmake/**') }}
+          restore-keys: |
+            cpm-${{ matrix.os }}-
 
       - name: Install Linux deps
         if: matrix.os == 'ubuntu-latest'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libgl-dev libgles-dev build-essential git make \
-            pkg-config cmake ninja-build gnome-desktop-testing libasound2-dev libpulse-dev \
-            libaudio-dev libjack-dev libsndio-dev libx11-dev libxext-dev \
-            libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev \
-            libxkbcommon-dev libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev \
-            libegl1-mesa-dev libdbus-1-dev libibus-1.0-dev libudev-dev fcitx-libs-dev
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+          libwayland-dev \
+          libxkbcommon-dev \
+          libegl1-mesa-dev \
+          libgles2-mesa-dev \
+          libgl1-mesa-dev \
+          libdbus-1-dev \
+          libudev-dev \
+          libasound2-dev \
+          ninja-build \
+          clang
 
       - name: Configure CMake
-        run: cmake --workflow --preset clang-full
+        run: cmake --workflow --preset ${{ matrix.preset }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.compiler }}-package
+          name: ${{ matrix.os }}-${{ matrix.preset }}-package
           path: |
             build/clang/*.tar.gz
             build/clang/*.rpm
