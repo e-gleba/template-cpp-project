@@ -1,5 +1,7 @@
-#include <doctest/doctest.h>
 #include <cstdint>
+
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
 
 namespace {
 constexpr std::int32_t factorial(std::int32_t n) noexcept {

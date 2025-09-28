@@ -7,6 +7,8 @@ cpmaddpackage(
     doctest/doctest
     VERSION
     2.4.12
+    SYSTEM
+    YES
     OPTIONS
     "DOCTEST_WITH_TESTS OFF"
     "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF"
