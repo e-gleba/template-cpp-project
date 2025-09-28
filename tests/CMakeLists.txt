@@ -1,6 +1,28 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_executable(doctest_example doctest_example.cxx)
-target_link_libraries(doctest_example PRIVATE doctest)
-set_target_properties(doctest_example PROPERTIES CXX_STANDARD 23)
-add_test(NAME doctest_example COMMAND $<TARGET_FILE:doctest_example>)
+file(
+    GLOB_RECURSE
+    src
+    CONFIGURE_DEPENDS
+    "*.cpp")
+
+add_executable(tests ${src})
+
+set_target_properties(tests PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED ON
+                                       CXX_EXTENSIONS OFF)
+
+target_link_libraries(tests PRIVATE doctest::doctest)
+
+target_compile_definitions(
+    tests
+    PRIVATE
+        # Use full macro names (e.g., DOCTEST_TEST_CASE instead of TEST_CASE)
+        DOCTEST_CONFIG_SUPER_FAST_ASSERTS
+        DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES
+        # Enable all asserts (even in release-like builds)
+        DOCTEST_CONFIG_ASSERTS_RETURN_VALUES # makes asserts usable in constexpr/void contexts
+        # For better debugging:
+        DOCTEST_CONFIG_USE_STD_HEADERS # use <iostream>, <string>, etc. instead of reimplementing
+    )
+
+doctest_discover_tests(tests)

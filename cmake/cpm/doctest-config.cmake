@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.28)
+
 cpmaddpackage(
     NAME
     doctest
@@ -5,14 +7,10 @@ cpmaddpackage(
     doctest/doctest
     VERSION
     2.4.12
-    DOWNLOAD_ONLY TRUE
     OPTIONS
     "DOCTEST_WITH_TESTS OFF"
-)
+    "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF"
+    "DOCTEST_NO_INSTALL ON"
+    "DOCTEST_USE_STD_HEADERS ON")
 
-add_subdirectory(
-    ${doctest_SOURCE_DIR}
-    ${doctest_BINARY_DIR}
-    SYSTEM
-    EXCLUDE_FROM_ALL
-)
+include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)

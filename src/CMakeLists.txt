@@ -1,35 +1,28 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_executable(main main.cxx)
-target_link_libraries(main PRIVATE warnings)
+add_executable(cli_app main.cpp)
+target_link_libraries(cli_app PRIVATE warnings)
 set_target_properties(
-    main
-    PROPERTIES CXX_STANDARD 23 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO
-)
+    cli_app
+    PROPERTIES CXX_STANDARD 23
+               CXX_STANDARD_REQUIRED YES
+               CXX_EXTENSIONS NO
+               OUTPUT_NAME "cli_app")
+
+install(TARGETS cli_app RUNTIME DESTINATION bin COMPONENT runtime)
+
+add_library(sdl_app SHARED sdl_main.cpp)
+target_link_libraries(sdl_app PRIVATE SDL3::SDL3-shared)
+
+install(
+    TARGETS sdl_app
+    LIBRARY DESTINATION lib # .so/.dylib
+    RUNTIME DESTINATION bin # .dll (Windows)
+    ARCHIVE DESTINATION lib # .lib (Windows import lib)
+            COMPONENT runtime)
 
 cpack_add_component(
     runtime
-    DISPLAY_NAME "Runtime"
+    DISPLAY_NAME "runtime"
     DESCRIPTION "template-cpp-project main (runtime component)"
-    REQUIRED
-)
-
-install(
-    TARGETS main
-    RUNTIME DESTINATION bin/main
-    ARCHIVE DESTINATION bin/main
-    LIBRARY
-        DESTINATION lib/main
-        COMPONENT runtime
-        PERMISSIONS
-            OWNER_READ
-            OWNER_WRITE
-            OWNER_EXECUTE
-            GROUP_READ
-            GROUP_EXECUTE
-            WORLD_READ
-            WORLD_EXECUTE
-)
-
-add_library(native_lib SHARED sdl_main.cxx)
-target_link_libraries(native_lib PRIVATE SDL3::SDL3-shared)
+    REQUIRED)
