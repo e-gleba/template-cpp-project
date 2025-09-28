@@ -4,44 +4,50 @@ project(
     cxx_project
     VERSION 1.0.0
     DESCRIPTION "My awesome C/C++ project!"
-    HOMEPAGE_URL "https://github.com/geugenm/template-cpp-project"
-    LANGUAGES C CXX
-)
+    HOMEPAGE_URL "https://github.com/e-gleba/template-cpp-project"
+    LANGUAGES C CXX)
 
 list(
     APPEND
     CMAKE_PREFIX_PATH
     ${CMAKE_CURRENT_LIST_DIR}/cmake
     ${CMAKE_CURRENT_LIST_DIR}/cmake/pkg
-    ${CMAKE_CURRENT_LIST_DIR}/cmake/utils
-)
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/utils)
 
-list(
-    APPEND
-    CMAKE_FIND_ROOT_PATH
-    ${CMAKE_CURRENT_LIST_DIR}/cmake
-    ${CMAKE_CURRENT_LIST_DIR}/cmake/pkg
-    ${CMAKE_CURRENT_LIST_DIR}/cmake/utils
-)
-
-message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+# Android: only extend CMAKE_FIND_ROOT_PATH if cross-compiling
+if(CMAKE_CROSSCOMPILING)
+    list(
+        APPEND
+        CMAKE_FIND_ROOT_PATH
+        "${CMAKE_CURRENT_LIST_DIR}/cmake"
+        "${CMAKE_CURRENT_LIST_DIR}/cmake/pkg"
+        "${CMAKE_CURRENT_LIST_DIR}/cmake/utils")
+endif()
 
 find_package(warnings CONFIG REQUIRED)
-
+find_package(sanitizers CONFIG REQUIRED)
 find_package(package CONFIG REQUIRED)
 
-find_package(clang_format CONFIG REQUIRED)
-find_package(clang_tidy CONFIG REQUIRED)
-find_package(clang_doc CONFIG REQUIRED)
-find_package(cpplint CONFIG REQUIRED)
-find_package(doxygen CONFIG REQUIRED)
+# Tooling (optional but guarded)
+option(ENABLE_DEV_TOOLS "Enable dev tools like clang-format, clang-tidy, etc."
+       ON)
+
+if(ENABLE_DEV_TOOLS)
+    find_package(clang_format CONFIG QUIET)
+    find_package(clang_tidy CONFIG QUIET)
+    find_package(clang_doc CONFIG QUIET)
+    find_package(cpplint CONFIG QUIET)
+    find_package(doxygen CONFIG QUIET)
+
+    # Optional: fail if critical tools missing in dev mode?
+    # mark_as_advanced(...)  # hide from GUI if desired
+endif()
 
 find_package(cpm CONFIG REQUIRED)
 
 add_subdirectory(src)
 
-option(BUILD_TESTS "Enable building of test suite" ON)
-if(BUILD_TESTS)
-    include(CTest)
+include(CTest)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
