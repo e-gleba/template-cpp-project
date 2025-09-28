@@ -3,7 +3,7 @@ FROM fedora:latest
 WORKDIR /app
 
 # Install essential C++ development tools, documentation, and workflow tools
-RUN dnf -y upgrade && \
+RUN dnf -y upgrade --refresh && \
     dnf -y install \
     clang \
     clang-tools-extra \
@@ -13,14 +13,15 @@ RUN dnf -y upgrade && \
     ninja-build \
     make \
     gcc-c++ \
-    cups-devel && \
-    dnf clean all
+    && dnf clean all
 
 COPY . /app
 
-# Optionally, set an entrypoint for workflow automation
-# Example: Run a specific CMake workflow preset
+# Validate CMake preset early (fail fast if misconfigured)
+RUN cmake --preset=gcc-full --check-presets
+
+# Default entrypoint: run the full build/test workflow
 ENTRYPOINT ["cmake", "--workflow", "--preset=gcc-full"]
 
-# Or, keep an interactive shell for development
+# Fallback: interactive shell if needed (e.g., docker run -it --entrypoint /bin/bash ...)
 # CMD ["/bin/bash"]

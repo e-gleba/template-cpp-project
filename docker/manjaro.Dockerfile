@@ -6,19 +6,22 @@ WORKDIR /app
 
 # Install essential C++ development tools, documentation, and workflow tools
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm \
+    pacman -S --needed --noconfirm \
     base-devel \
     clang \
     clang-doc \
     doxygen \
     cmake \
     git \
-    ninja
+    ninja \
+    && pacman -Scc --noconfirm
 
 # Copy the source code into the container
 COPY . /app
 
-# Optionally, set an entrypoint for workflow automation
+# Validate CMake preset early to fail fast on configuration errors
+RUN cmake --preset=gcc-full --check-presets
+
 # Example: Run a specific CMake workflow preset
 ENTRYPOINT ["cmake", "--workflow", "--preset=gcc-full"]
 

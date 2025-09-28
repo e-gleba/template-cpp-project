@@ -29,7 +29,7 @@ find_package(package CONFIG REQUIRED)
 
 # Tooling (optional but guarded)
 option(ENABLE_DEV_TOOLS "Enable dev tools like clang-format, clang-tidy, etc."
-       ON)
+       OFF)
 
 if(ENABLE_DEV_TOOLS)
     find_package(clang_format CONFIG QUIET)
