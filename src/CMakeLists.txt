@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 add_executable(cli_app main.cpp)
-target_link_libraries(cli_app PRIVATE warnings)
+target_link_libraries(cli_app PRIVATE warnings sanitizers)
 set_target_properties(
     cli_app
     PROPERTIES CXX_STANDARD 23
@@ -12,7 +12,7 @@ set_target_properties(
 install(TARGETS cli_app RUNTIME DESTINATION bin COMPONENT runtime)
 
 add_library(sdl_app SHARED sdl_main.cpp)
-target_link_libraries(sdl_app PRIVATE SDL3::SDL3-shared)
+target_link_libraries(sdl_app PRIVATE SDL3::SDL3-shared warnings sanitizers)
 
 install(
     TARGETS sdl_app
