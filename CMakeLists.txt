@@ -25,7 +25,6 @@ if(CMAKE_CROSSCOMPILING)
 endif()
 
 find_package(warnings CONFIG REQUIRED)
-find_package(sanitizers CONFIG REQUIRED)
 find_package(package CONFIG REQUIRED)
 
 # Tooling (optional but guarded)
