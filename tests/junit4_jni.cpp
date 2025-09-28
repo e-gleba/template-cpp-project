@@ -71,7 +71,7 @@ Java_com_egleba_app_AppActivityTest_runTest(JNIEnv* env, jclass,
 
     doctest::Context ctx;
     ctx.setOption("test-case", name);
-    ctx.setOption("no-exitcode", true);
+    ctx.setOption("no-exitcode", true); // todo: make a comment why critical
     ctx.setOption("duration", true);
 
     const int res = ctx.run();
