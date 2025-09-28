@@ -3,7 +3,8 @@
 
 #include <cstdlib>
 
-int main()
+// avoid SDL_main unresolved externals
+int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
     if (!SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO))
     {
