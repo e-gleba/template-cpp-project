@@ -7,7 +7,8 @@
 [[nodiscard]] std::set<std::string> get_all_tests()
 {
     std::set<std::string> names;
-    for (const auto& test : doctest::getRegisteredTests()) {
+    for (const auto& test : doctest::getRegisteredTests())
+    {
         names.insert(test.m_name);
     }
     return names;

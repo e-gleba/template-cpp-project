@@ -12,19 +12,6 @@ static constexpr auto green = "\033[38;5;46m";
 /// @brief Main entry point of the program
 /// @return EXIT_SUCCESS on successful execution, EXIT_FAILURE on error
 /// @details Demonstrates the usage of std::print with ANSI color formatting
-/// @exception std::exception Catches and handles any standard library
-/// exceptions
-///
-/// Example output:
-/// @code
-/// ⬤ C++ 2023.23.0 ISO/IEC P2693R5 (gcc-13.2.1)
-///
-/// ⬤ Hello, World!
-/// @endcode
-///
-/// @note Requires C++23 compiler support for std::print
-/// @warning Terminal must support ANSI escape sequences for color output
-/// @see https://en.cppreference.com/w/cpp/io/print
 int main()
 {
     try

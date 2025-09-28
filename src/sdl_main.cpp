@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-    struct SDLGuard
+    struct SDLGuard final
     {
         ~SDLGuard() { SDL_Quit(); }
     } sdl_guard;
