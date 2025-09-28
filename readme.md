@@ -1,19 +1,19 @@
 # 🚀 Modern C++ Project Template
 
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-23%2F26-00599C?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=1C1C1C)](https://isocpp.org/)
-[![CMake](https://img.shields.io/badge/CMake-3.28%2B-064F8C?style=for-the-badge&logo=cmake&logoColor=white&labelColor=1C1C1C)](https://cmake.org)
+[![CMake](https://img.shields.io/badge/CMake-3.30%2B-064F8C?style=for-the-badge&logo=cmake&logoColor=white&labelColor=1C1C1C)](https://cmake.org)
 [![License](https://img.shields.io/badge/License-AGPL--3.0-FF6B6B?style=for-the-badge&logo=gnu&logoColor=white&labelColor=1C1C1C)](https://www.gnu.org/licenses/agpl-3.0.html)
 
 [![Build Matrix](https://img.shields.io/badge/Build%20Matrix-GCC%20%7C%20Clang%20%7C%20MSVC-4ECDC4?style=for-the-badge&logo=githubactions&logoColor=white&labelColor=1C1C1C)](https://github.com/features/actions)
-[![Performance](https://img.shields.io/badge/Performance-Optimized-45B7D1?style=for-the-badge&logo=speedtest&logoColor=white&labelColor=1C1C1C)](#performance-benchmarks)
+[![Performance](https://img.shields.io/badge/Performance-TODO-45B7D1?style=for-the-badge&logo=speedtest&logoColor=white&labelColor=1C1C1C)](#performance-benchmarks)
 [![Architecture](https://img.shields.io/badge/Architecture-x64%20%7C%20ARM64-96CEB4?style=for-the-badge&logo=arm&logoColor=white&labelColor=1C1C1C)](#supported-architectures)
 
-[![Documentation](https://img.shields.io/badge/Docs-Doxygen%20%7C%20Sphinx-FEA47F?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=1C1C1C)](https://doxygen.nl/)
-[![Testing](https://img.shields.io/badge/Testing-Catch2%20%7C%20Doctest-F7931E?style=for-the-badge&logo=testinglibrary&logoColor=white&labelColor=1C1C1C)](#testing-framework)
-[![Package Manager](https://img.shields.io/badge/Dependencies-CPM%20%7C%20Conan-FF7F7F?style=for-the-badge&logo=cmake&logoColor=white&labelColor=1C1C1C)](#dependency-management)
+[![Documentation](https://img.shields.io/badge/Docs-Doxygen-FEA47F?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=1C1C1C)](https://doxygen.nl/)
+[![Testing](https://img.shields.io/badge/Testing-Doctest-F7931E?style=for-the-badge&logo=testinglibrary&logoColor=white&labelColor=1C1C1C)](#testing-framework)
+[![Package Manager](https://img.shields.io/badge/Dependencies-CPM-FF7F7F?style=for-the-badge&logo=cmake&logoColor=white&labelColor=1C1C1C)](#dependency-management)
 
-[![Containerization](https://img.shields.io/badge/Docker-Multi--Stage%20%7C%20Distroless-0db7ed?style=for-the-badge&logo=docker&logoColor=white&labelColor=1C1C1C)](https://www.docker.com/)
-[![CI/CD](https://img.shields.io/badge/Pipeline-GitHub%20Actions%20%7C%20GitLab%20CI-2088FF?style=for-the-badge&logo=githubactions&logoColor=white&labelColor=1C1C1C)](#continuous-integration)
+[![Containerization](https://img.shields.io/badge/Docker-Distroless-0db7ed?style=for-the-badge&logo=docker&logoColor=white&labelColor=1C1C1C)](https://www.docker.com/)
+[![CI/CD](https://img.shields.io/badge/Pipeline-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white&labelColor=1C1C1C)](#continuous-integration)
 [![IDE Support](https://img.shields.io/badge/IDE-CLion%20%7C%20VS%20Code%20%7C%20Qt%20Creator-FF6B6B?style=for-the-badge&logo=visualstudiocode&logoColor=white&labelColor=1C1C1C)](#development-environment)
 
 ## 🌟 Features
