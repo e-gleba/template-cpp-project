@@ -13,8 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        build_type: [Release]
-        compiler: [clang]
         include:
           - os: ubuntu-latest
             preset: clang-full
@@ -24,15 +22,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache CPM dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ github.workspace }}/_deps
-            ~/.cache/CPM
-          key: cpm-${{ matrix.os }}-${{ hashFiles('CMakeLists.txt', 'cmake/**') }}
-          restore-keys: |
-            cpm-${{ matrix.os }}-
+      - name: Install NSIS (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install nsis -y
+          echo "C:\Program Files (x86)\NSIS" >> $GITHUB_PATH
 
       - name: Install Linux deps
         if: matrix.os == 'ubuntu-latest'
