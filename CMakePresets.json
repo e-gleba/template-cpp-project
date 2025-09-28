@@ -151,7 +151,7 @@
       "name": "clang-package",
       "displayName": "Clang Package",
       "configurePreset": "clang",
-      "generators": ["TGZ", "DEB"]
+      "generators": ["TGZ", "RPM"]
     },
     {
       "name": "gcc-package",

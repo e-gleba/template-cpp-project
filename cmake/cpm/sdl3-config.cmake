@@ -9,6 +9,8 @@ cpmaddpackage(
     a96677bdf6b4acb84af4ec294e5f60a4e8cbbe03
     SYSTEM
     YES
+    GIT_SHALLOW
+    TRUE
     OPTIONS
     "SDL_STATIC
     OFF"

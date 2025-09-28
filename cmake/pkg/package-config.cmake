@@ -1,3 +1,5 @@
+include(CPack)
+
 set(PROJECT_VENDOR "geugenm")
 set(PROJECT_CONTACT "glebajk@gmail.com")
 set(PROJECT_LICENSE "GPL-2.0") # Use SPDX identifier (required by DEB/RPM)
@@ -17,13 +19,6 @@ endif()
 set(PROJECT_ICON_FILE "${CMAKE_CURRENT_LIST_DIR}/icon.png")
 set(PROJECT_LICENSE_FILE "${CMAKE_SOURCE_DIR}/license") # uppercase (convention)
 set(PROJECT_README_FILE "${CMAKE_SOURCE_DIR}/readme.md")
-
-foreach(file ${PROJECT_LICENSE_FILE} ${PROJECT_README_FILE}
-             ${PROJECT_ICON_FILE})
-    if(NOT EXISTS "${file}")
-        message(WARNING "CPack resource missing: ${file}")
-    endif()
-endforeach()
 
 configure_file("${CMAKE_CURRENT_LIST_DIR}/package.desktop.in"
                "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.desktop" @ONLY)
@@ -46,7 +41,6 @@ install(FILES "${PROJECT_ICON_FILE}"
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.desktop"
         DESTINATION "share/applications")
 
-include(CPack)
 cpack_add_component(
     documentation
     DISPLAY_NAME "Documentation"
