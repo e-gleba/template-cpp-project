@@ -14,7 +14,6 @@ list(
     ${CMAKE_CURRENT_LIST_DIR}/cmake/pkg
     ${CMAKE_CURRENT_LIST_DIR}/cmake/utils)
 
-# Android: only extend CMAKE_FIND_ROOT_PATH if cross-compiling
 if(CMAKE_CROSSCOMPILING)
     list(
         APPEND
@@ -32,11 +31,11 @@ option(ENABLE_DEV_TOOLS "Enable dev tools like clang-format, clang-tidy, etc."
        OFF)
 
 if(ENABLE_DEV_TOOLS)
-    find_package(clang_format CONFIG QUIET)
-    find_package(clang_tidy CONFIG QUIET)
-    find_package(clang_doc CONFIG QUIET)
-    find_package(cpplint CONFIG QUIET)
-    find_package(doxygen CONFIG QUIET)
+    find_package(clang_format CONFIG REQUIRED)
+    find_package(clang_tidy CONFIG REQUIRED)
+    find_package(clang_doc CONFIG REQUIRED)
+    find_package(cpplint CONFIG REQUIRED)
+    find_package(doxygen CONFIG REQUIRED)
 
     # Optional: fail if critical tools missing in dev mode?
     # mark_as_advanced(...)  # hide from GUI if desired

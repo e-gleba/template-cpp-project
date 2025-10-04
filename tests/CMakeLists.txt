@@ -40,7 +40,6 @@ target_compile_definitions(
     )
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux|Windows|Darwin")
-    # TODO: make it explicit, without in cpm auto call
-    # include(doctest)
+    include(doctest)
     doctest_discover_tests(tests)
 endif()

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.30)
 
 cpmaddpackage(
     NAME
@@ -8,13 +8,22 @@ cpmaddpackage(
     VERSION
     2.4.12
     SYSTEM
-    YES
+    ON
     GIT_SHALLOW
-    TRUE
+    ON
     OPTIONS
     "DOCTEST_WITH_TESTS OFF"
     "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF"
     "DOCTEST_NO_INSTALL ON"
     "DOCTEST_USE_STD_HEADERS ON")
 
-include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
+if(doctest_ADDED)
+    set(doctest_cmake_path "${doctest_SOURCE_DIR}/scripts/cmake")
+    set(doctest_source "downloaded")
+else()
+    set(doctest_cmake_path "${doctest_DIR}")
+    set(doctest_source "system")
+endif()
+
+list(APPEND CMAKE_MODULE_PATH "${doctest_cmake_path}")
+message(STATUS "doctest (${doctest_source}) -> '${doctest_cmake_path}'")

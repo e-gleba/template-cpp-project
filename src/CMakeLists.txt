@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.30)
 
 add_executable(cli_app main.cpp)
 target_link_libraries(cli_app PRIVATE warnings)
