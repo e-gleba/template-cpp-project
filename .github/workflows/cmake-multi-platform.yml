@@ -1,10 +1,40 @@
-name: CMake Multi-Platform CI/CD
+name: cmake-multiplatform-workflow
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'cmake/**'
+      - '**/*.cmake'
+      - '**/*.cpp'
+      - '**/*.hpp'
+      - '**/*.c'
+      - '**/*.h'
+      - '**/*.cxx'
+      - '**/*.hxx'
+      - 'CMakeLists.txt'
+      - '**/*CMakeLists*.txt'
+      - '**/*CMakePresets.json'
+      - '.github/workflows/**'
   pull_request:
     branches: ["main"]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'cmake/**'
+      - '**/*.cmake'
+      - '**/*.cpp'
+      - '**/*.hpp'
+      - '**/*.c'
+      - '**/*.h'
+      - '**/*.cxx'
+      - '**/*.hxx'
+      - 'CMakeLists.txt'
+      - '**/*CMakeLists*.txt'
+      - '**/CMakePresets.json'
+      - '.github/workflows/**'
 
 jobs:
   build-package:
@@ -41,11 +71,23 @@ jobs:
       - name: Configure CMake
         run: cmake --workflow --preset ${{ matrix.preset }}
 
-      - name: Upload Artifacts
+      - name: Upload ZIP artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.preset }}-package
-          path: |
-            build/*/*.tar.gz
-            build/*/*.rpm
-            build/*/*.zip
+          name: ${{ matrix.os }}-${{ matrix.preset }}-zip
+          path: build/*/*.zip
+          if-no-files-found: ignore
+
+      - name: Upload TAR.GZ artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.preset }}-tar-gz
+          path: build/*/*.tar.gz
+          if-no-files-found: ignore
+
+      - name: Upload RPM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.preset }}-rpm
+          path: build/*/*.rpm
+          if-no-files-found: ignore
