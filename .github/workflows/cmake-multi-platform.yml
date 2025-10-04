@@ -1,4 +1,4 @@
-name: cmake-multiplatform-workflow
+name: cmake-desktop-multiplatform-workflow
 
 on:
   push:
@@ -39,6 +39,8 @@ on:
 jobs:
   build-package:
     runs-on: ${{ matrix.os }}
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: "8"
     strategy:
       fail-fast: false
       matrix:
