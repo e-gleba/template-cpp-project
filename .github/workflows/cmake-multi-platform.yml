@@ -46,6 +46,6 @@ jobs:
         with:
           name: ${{ matrix.os }}-${{ matrix.preset }}-package
           path: |
-            build/clang/*.tar.gz
-            build/clang/*.rpm
-            build/clang/*.zip
+            build/*/*.tar.gz
+            build/*/*.rpm
+            build/*/*.zip
